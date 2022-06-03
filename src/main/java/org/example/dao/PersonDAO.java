@@ -14,6 +14,7 @@ import java.util.List;
 @Component
 public class PersonDAO {
      private final JdbcTemplate jdbcTemplate;
+     private int count = 1;
 
      @Autowired
      public PersonDAO(JdbcTemplate jdbcTemplate) {
@@ -30,7 +31,8 @@ public class PersonDAO {
      }
 
      public void save(Person person) {
-          jdbcTemplate.update("INSERT INTO Person VALUES(1, ?, ?, ?)", person.getName(), person.getAge(), person.getEmail());
+          jdbcTemplate.update("INSERT INTO Person VALUES(?, ?, ?, ?)", count, person.getName(), person.getAge(), person.getEmail());
+          count++;
      }
 
      public void update(int id, Person updatedPerson) {
